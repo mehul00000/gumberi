@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="coarse" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.11" numOctaves="4" seed="33" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.38  0 0 0 0 0.29  0 0 0 0 0.12  0 0 0 0.5 0"/>
+    </filter>
+    <filter id="fine" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="9" stitchTiles="stitch" result="n2"/>
+      <feColorMatrix in="n2" type="matrix" values="0 0 0 0 1  0 0 0 0 0.97  0 0 0 0 0.9  0 0 0 0.14 0"/>
+    </filter>
+  </defs>
+  <rect width="800" height="1000" fill="#9c7a3c"/>
+  <rect width="800" height="1000" filter="url(#coarse)"/>
+  <rect width="800" height="1000" filter="url(#fine)"/>
+  <path d="M0 480 C 240 420, 480 560, 800 470" stroke="#5f4a1f" stroke-width="2.5" fill="none" opacity="0.45"/>
+  <circle cx="180" cy="200" r="110" fill="#efe6d4" opacity="0.18"/>
+  <circle cx="650" cy="800" r="140" fill="#5f4a1f" opacity="0.2"/>
+</svg>
