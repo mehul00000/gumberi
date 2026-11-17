@@ -3,6 +3,7 @@
 import { ClerkProvider, useUser } from "@clerk/nextjs";
 import {
   createContext,
+  Suspense,
   useContext,
   type ReactNode,
 } from "react";
@@ -94,7 +95,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         },
       }}
     >
-      <ClerkBridge>{children}</ClerkBridge>
+      {/* Next 16 cacheComponents: useUser() reads request data, so the bridge
+          must suspend inside a boundary. While suspended (static prerender)
+          children still render with a not-yet-loaded auth state. */}
+      <Suspense
+        fallback={
+          <AuthContext.Provider
+            value={{ mode: "clerk", user: null, isLoaded: false }}
+          >
+            {children}
+          </AuthContext.Provider>
+        }
+      >
+        <ClerkBridge>{children}</ClerkBridge>
+      </Suspense>
     </ClerkProvider>
   );
 }

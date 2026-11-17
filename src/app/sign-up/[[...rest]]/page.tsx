@@ -3,6 +3,7 @@
 import { SignUp } from "@clerk/nextjs";
 import { Sparkles } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 import { CLERK_ENABLED } from "@/components/providers/auth-provider";
 import { ButtonLink } from "@/components/ui/button";
 import { BrandMark } from "@/components/ui/brand-mark";
@@ -11,7 +12,9 @@ export default function SignUpPage() {
   return (
     <div className="flex min-h-[80svh] flex-col items-center justify-center px-5 py-16">
       {CLERK_ENABLED ? (
-        <SignUp fallbackRedirectUrl="/" signInUrl="/sign-in" />
+        <Suspense>
+          <SignUp fallbackRedirectUrl="/" signInUrl="/sign-in" />
+        </Suspense>
       ) : (
         <div className="w-full max-w-md border border-line bg-card p-10 text-center">
           <BrandMark className="mx-auto h-14 w-14" />
