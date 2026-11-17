@@ -1,0 +1,11 @@
+# Netlify deployment config.
+# Note: src/proxy.ts is renamed to proxy.ts.netlify-disabled because the
+# Next.js runtime plugin fails to bundle it on Windows paths (it is inert
+# in demo mode anyway). To go live with Clerk, restore src/proxy.ts —
+# Linux build images bundle it correctly.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
